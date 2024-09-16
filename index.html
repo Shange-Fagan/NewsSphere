@@ -365,90 +365,25 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
   const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
   const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
   const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
-  
-  // Globe Material
-  const globeMaterial = new THREE.MeshPhongMaterial({
-    map: dayTexture,
-    bumpMap: bumpMap,
-    bumpScale: 0.35,
-    specularMap: specularMap,
-    specular: new THREE.Color('grey'),
-    shininess: 15,
-    
-  });
-      const material2 = new THREE.MeshPhongMaterial({
-        map: dayTexture,      // Use day texture by default
-        bumpMap: bumpMap,
-        bumpScale: 0.35,
-        shininess: 50,         // Specular highlight intensity
-        specular: 0x222222     // Specular color (adjust for reflectiveness)
-      });
-    
-  // Globe Geometry
-  /*const globeGeometry = new THREE.SphereGeometry(5.1, 64, 64);
-  const globeMesh = new THREE.Mesh(globeGeometry, material2);
-  scene.add(globeMesh);*/
-  
-  // Atmosphere
-  const atmosphereMaterial = new THREE.ShaderMaterial({
-  vertexShader: `
-    varying vec3 vertexNormal;
-    void main() {
-      vertexNormal = normalize(normalMatrix * normal);
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: `
-    varying vec3 vertexNormal;
-    void main() {
-      float intensity = pow(0.6 - dot(vertexNormal, vec3(0, 0, 1.0)), 2.0);
-      gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
-    }
-  `,
-  blending: THREE.AdditiveBlending,
-  side: THREE.BackSide,
-  transparent: true,
-});
-	  const sphereWidth2 = 5.1;
-  const sphereHeight2 = 64;
-  const sphereDepth2 = 64;
-  const geometry3 = new THREE.SphereGeometry(
+  const sphereWidth = 5.1;
+  const sphereHeight = 32.1;
+  const sphereDepth = 32.1;
+  const geometry = new THREE.SphereGeometry(
+    sphereWidth,
+    sphereHeight,
+    sphereDepth
+  );
+
+  const sphereWidth2 = 5.099;
+  const sphereHeight2 = 32.1;
+  const sphereDepth2 = 32.1;
+  const geometry2 = new THREE.SphereGeometry(
     sphereWidth2,
     sphereHeight2,
     sphereDepth2
   );
-const atmosphereMesh = new THREE.Mesh(geometry3, atmosphereMaterial);
-atmosphereMesh.scale.set(1.1, 1.1, 1.1);
-scene.add(atmosphereMesh);
-    // Ambient Light
-  /*const ambientLight = new THREE.AmbientLight(0x808080);
-  scene.add(ambientLight);
-  
-  // Directional Light
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-  directionalLight.position.set(-1, -1, -1);
-  scene.add(directionalLight);*/
-    // Remove existing lights
-//scene.remove(ambientLight);
-//scene.remove(directionalLight);
-
-// Add new Ambient Light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft white light
-scene.add(ambientLight);
-
-// Add a Directional Light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight.position.set(5, 5, 5); // Position it to shine on the globe
-scene.add(directionalLight);
-	 
-    const sphereWidth = 5.099;
-  const sphereHeight = 64;
-  const sphereDepth = 64;
-  const geometry2 = new THREE.SphereGeometry(
-    sphereWidth,
-    sphereHeight,
-    sphereDepth
-  );const shaderMaterial = new THREE.ShaderMaterial({});
+  //const textureLoader = new THREE.TextureLoader();
+  const shaderMaterial = new THREE.ShaderMaterial({});
 
   const material = new THREE.ShaderMaterial({
     vertexShader: `
@@ -512,14 +447,80 @@ scene.add(directionalLight);
     },
   });
 
-  
-let globe = new THREE.Mesh(geometry2, material);
-  //scene.add(atmosphere);
+  const atmosphere = new THREE.Mesh(
+    new THREE.SphereGeometry(5.1, 32.1, 32.1),
+    new THREE.ShaderMaterial({
+      vertexShader: `
+                varying vec3 vertexNormal;
+                   void main() {
+                        vertexNormal = normalize(normalMatrix * normal);
+                       gl_Position = projectionMatrix
+                       * modelViewMatrix
+                       * vec4(position, 1);
+                     }
+                    `,
+      fragmentShader: `
+                varying vec3 vertexNormal;
+                    void main() {
+                    float intensity = pow(0.6 - dot(
+                     vertexNormal, vec3(0, 0, 1.0)), 2.0);
+                     gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
+                    }
+                    `,
+	    transparent: true, 
+      blending: THREE.AdditiveBlending,
+      side: THREE.BackSide,
+    })
+  );
+	atmosphere.scale.set(1.1, 1.1, 1.1);	
+// Create the material
+const material2 = new THREE.MeshPhongMaterial({
+  specular: 0x111111,
+  shininess: 5,
+  map: dayTexture, // Start with day texture
+  specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
+  bumpMap: dayBumpMap, // Start with day bump map
+  bumpScale: 0.35,
+  blending: THREE.AdditiveBlending,
+});
+	  let globe = new THREE.Mesh(geometry2, material);
+  let globe2 = new THREE.Mesh(geometry, material2);
+  scene.add(atmosphere);
   scene.add(globe);
-  let globe2 = new THREE.Mesh(geometry3, material2);
-  //scene.add(atmosphere);
-  //scene.add(globe);
   scene.add(globe2);
+  // custom globe material
+  const globeMaterial = globe.material;
+  material.bumpScale = 10;
+  new THREE.TextureLoader().load(
+    "//unpkg.com/three-globe/example/img/earth-water.png",
+    (texture) => {
+      globeMaterial.specularMap = texture;
+      globeMaterial.specular = new THREE.Color("grey");
+      globeMaterial.shininess = 15;
+    }
+  );
+	  setTimeout(() => {
+    // wait for scene to be populated (asynchronously)
+    var dl = new THREE.DirectionalLight(0xffffff, 1);
+    dl.position.set(1, 1, 1);
+    //scene.add(dl); // change light position to see the specularMap's effect
+  });
+  // White directional light at half intensity shining from the top.
+  const directionalLight = new THREE.DirectionalLight(0x909090, 1);
+  directionalLight.position.set(-1, -1, -1);
+  scene.add(directionalLight);
+  var dl2 = new THREE.DirectionalLight(0xffffff, 1);
+  dl2.position.set(0, 1, 1);
+  //scene.add(dl2); // change light position to see the specularMap's effect
+  var dl3 = new THREE.DirectionalLight(0xffffff, 1);
+  dl3.position.set(3, 2, 1);
+  //scene.add(dl3);
+  const light2 = new THREE.AmbientLight(0x808080); // soft white light
+  scene.add(light2);
+
+  var light = new THREE.DirectionalLight(0xf0f0f0, 1);
+  light.position.set(5, 3, 5);
+  scene.add(light);
     // Markers Data
   const markersData = [
     {
