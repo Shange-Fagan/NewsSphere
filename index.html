@@ -385,9 +385,9 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
       });
     
   // Globe Geometry
-  const globeGeometry = new THREE.SphereGeometry(5.1, 64, 64);
+  /*const globeGeometry = new THREE.SphereGeometry(5.1, 64, 64);
   const globeMesh = new THREE.Mesh(globeGeometry, material2);
-  scene.add(globeMesh);
+  scene.add(globeMesh);*/
   
   // Atmosphere
   const atmosphereMaterial = new THREE.ShaderMaterial({
@@ -432,6 +432,14 @@ scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.set(5, 5, 5); // Position it to shine on the globe
 scene.add(directionalLight);
+	  const sphereWidth2 = 5.1;
+  const sphereHeight2 = 64;
+  const sphereDepth32 = 64;
+  const geometry3 = new THREE.SphereGeometry(
+    sphereWidth2,
+    sphereHeight2,
+    sphereDepth2
+  );
     const sphereWidth = 5.099;
   const sphereHeight = 64;
   const sphereDepth = 64;
@@ -507,6 +515,10 @@ scene.add(directionalLight);
 let globe = new THREE.Mesh(geometry2, material);
   //scene.add(atmosphere);
   scene.add(globe);
+  let globe2 = new THREE.Mesh(geometry3, material2);
+  scene.add(atmosphere);
+  //scene.add(globe);
+  scene.add(globe2);
     // Markers Data
   const markersData = [
     {
