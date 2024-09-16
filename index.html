@@ -396,14 +396,14 @@ iframe::-webkit-scrollbar {
   
       // Show Label
       labelDiv.classList.add('active');
+      labelDiv.addEventListener('mousedown', (event) => {
+      event.stopPropagation();
+    });
+    labelDiv.addEventListener('touchstart', (event) => {
+      event.stopPropagation();
+  });
     }
   });
-    labelDiv.addEventListener('mousedown', (event) => {
-  event.stopPropagation();
-});
-labelDiv.addEventListener('touchstart', (event) => {
-  event.stopPropagation();
-});
     // Animation Loop
   const clock = new THREE.Clock();
   
