@@ -27,6 +27,7 @@ a, button, input, select, iframe {
   width: 100%;
   text-align: center;
   color: teal;
+  z-index: 1;
 }
 
 #info {
@@ -82,9 +83,9 @@ a, button, input, select, iframe {
   /*height: 186px;*/
   /*border: 4px solid rgb(0, 107, 63);*/
   /*border-radius: 10px;*/
-  z-index: 10;
-  margin: 0;
-  padding: 0;
+  z-index: 2;
+  /*margin: 0;
+  padding: 0;*/
   display: none; /* Hidden by default */
 }
 
@@ -105,18 +106,18 @@ a, button, input, select, iframe {
   opacity: 0.25;
   transition: opacity 0.3s;
   cursor: pointer;
-  z-index: 11;
+  /*z-index: 11;*/
 }
 
 .marker-label .close-button:hover {
   opacity: 1;
 }
 
-.marker-label .content {
+/*.marker-label .content {
   margin: 4px;
-  width: calc(100% - 8px); /* Adjust for margins */
+  width: calc(100% - 8px); // Adjust for margins 
   height: calc(100% - 8px);
-}
+}*/
 
 .marker-label iframe {
   all: initial;
