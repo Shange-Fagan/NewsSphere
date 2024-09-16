@@ -390,6 +390,12 @@ scene.add(atmosphereMesh);
   
     // Store label object for interaction
     data.labelObject = labelObject;
+    labelDiv.addEventListener('mousedown', (event) => {
+      event.stopPropagation();
+    });
+    labelDiv.addEventListener('touchstart', (event) => {
+      event.stopPropagation();
+  });
   });
     // Raycaster for Interaction
   const raycaster = new THREE.Raycaster();
@@ -414,13 +420,7 @@ scene.add(atmosphereMesh);
       contentDiv.innerHTML = `<iframe src="${data.iframeSrc}" frameborder="0"></iframe>`;
   
       // Show Label
-      labelDiv.classList.add('active');
-      labelDiv.addEventListener('mousedown', (event) => {
-      event.stopPropagation();
-    });
-    labelDiv.addEventListener('touchstart', (event) => {
-      event.stopPropagation();
-  });
+      labelDiv.classList.add('active');]
     }
   });
     // Animation Loop
