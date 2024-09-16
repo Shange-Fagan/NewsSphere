@@ -307,14 +307,14 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
       const cubeTextureLoader = new THREE.CubeTextureLoader();
 	  const isMobile = /Mobi/i.test(navigator.userAgent);
 
-const cubeMap = cubeTextureLoader.load([
+/*const cubeMap = cubeTextureLoader.load([
   isMobile ? 'js/px.webp' : 'js/px.png', // Right face
   isMobile ? 'js/nx.webp' : 'js/nx.png', // Left face
   isMobile ? 'js/py.webp' : 'js/py.png', // Top face
   isMobile ? 'js/ny.webp' : 'js/ny.png', // Bottom face
   isMobile ? 'js/pz.webp' : 'js/pz.png', // Front face
   isMobile ? 'js/nz.webp' : 'js/nz.png'  // Back face
-]);
+]);*/
 	  // Load Cube Maps for Background
     const cubeTextureLoader = new THREE.CubeTextureLoader();
     const dayCubeMap = cubeTextureLoader.load([
@@ -326,12 +326,12 @@ const cubeMap = cubeTextureLoader.load([
   isMobile ? 'js/nz.webp' : 'js/nz.png'  // Back face
     ]);
     const nightCubeMap = cubeTextureLoader.load([
-      isMobile ? 'js/px.webp' : 'js/px.png', // Right face
-  isMobile ? 'js/nx.webp' : 'js/nx.png', // Left face
-  isMobile ? 'js/py.webp' : 'js/py.png', // Top face
-  isMobile ? 'js/ny.webp' : 'js/ny.png', // Bottom face
-  isMobile ? 'js/pz.webp' : 'js/pz.png', // Front face
-  isMobile ? 'js/nz.webp' : 'js/nz.png'  // Back face
+      isMobile ? 'js/px.webp' : 'js/px(1).png', // Right face
+  isMobile ? 'js/nx.webp' : 'js/nx(1).png', // Left face
+  isMobile ? 'js/py.webp' : 'js/py(1).png', // Top face
+  isMobile ? 'js/ny.webp' : 'js/ny(1).png', // Bottom face
+  isMobile ? 'js/pz.webp' : 'js/pz(1).png', // Front face
+  isMobile ? 'js/nz.webp' : 'js/nz(1).png'  // Back face
     ]);
 
     // Set Initial Background Cube Map
