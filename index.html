@@ -166,7 +166,7 @@ iframe::-webkit-scrollbar {
   rgbeLoader.setDataType(THREE.UnsignedByteType); // Set data type to Unsigned Byte
   
   // Replace the URL with the path to your HDRI file
-  rgbeLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (texture) {
+  rgbeLoader.load('/js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (texture) {
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     pmremGenerator.compileEquirectangularShader();
   
