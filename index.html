@@ -259,12 +259,12 @@ iframe::-webkit-scrollbar {
   controls.autoRotateSpeed = 0.25;
 
    // Lighting - Reduced intensity to reduce glare
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft ambient light
+    /*const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft ambient light
     scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4); // Reduced intensity
     directionalLight.position.set(5, 5, 5); // Adjust position
-    scene.add(directionalLight);
+    scene.add(directionalLight);*/
   
   // Global Uniforms
   const globalUniforms = {
@@ -425,13 +425,13 @@ scene.add(atmosphereMesh);
 //scene.remove(directionalLight);
 
 // Add new Ambient Light
-/*const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft white light
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft white light
 scene.add(ambientLight);
 
 // Add a Directional Light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.set(5, 5, 5); // Position it to shine on the globe
-scene.add(directionalLight);*/
+scene.add(directionalLight);
     const sphereWidth = 5.099;
   const sphereHeight = 64;
   const sphereDepth = 64;
