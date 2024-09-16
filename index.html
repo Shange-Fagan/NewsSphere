@@ -273,12 +273,29 @@ function checkTexturesLoaded() {
 const textureLoader = new THREE.TextureLoader();
 
 // Background Texture
-    const loader = new THREE.TextureLoader();
+    /*const loader = new THREE.TextureLoader();
 loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (texture) {
   const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
   rt.fromEquirectangularTexture(renderer, texture);
   scene.background = rt.texture;
-});
+});*/
+	  // Load the Cube Map
+      const cubeTextureLoader = new THREE.CubeTextureLoader();
+      const cubeMap = cubeTextureLoader.load([
+        'js/px.png', // Right face
+        'js/nx.png', // Left face
+        'js/py.png', // Top face
+        'js/ny.png', // Bottom face
+        'js/pz.png', // Front face
+        'js/nz.png'  // Back face
+      ]);
+
+      // Set the cube map as the scene background
+      scene.background = cubeMap;
+
+      animate();
+    }
+
 
     // Load Textures
   //const textureLoader = new THREE.TextureLoader();
