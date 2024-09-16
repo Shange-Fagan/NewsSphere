@@ -112,6 +112,54 @@ iframe::-webkit-scrollbar {
   <!-- Main JavaScript -->
   <script type="module">
     // JavaScript code will go here
+    import * as THREE from "https://cdn.skypack.dev/three@0.136.0";
+  import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls";
+  import {
+    CSS2DRenderer,
+    CSS2DObject,
+  } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/renderers/CSS2DRenderer.js";
+  
+  // Scene Setup
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);
+  camera.position.set(20, 0.5, 15).setLength(17);
+  
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  document.body.appendChild(renderer.domElement);
+  
+  // Label Renderer
+  const labelRenderer = new CSS2DRenderer();
+  labelRenderer.setSize(innerWidth, innerHeight);
+  labelRenderer.domElement.style.position = 'absolute';
+  labelRenderer.domElement.style.top = '0px';
+  document.body.appendChild(labelRenderer.domElement);
+  
+  // Controls
+  const controls = new OrbitControls(camera, labelRenderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.25;
+  controls.enableZoom = true;
+  controls.minDistance = 15;
+  controls.maxDistance = 20;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.1;
+  
+  // Global Uniforms
+  const globalUniforms = {
+    time: { value: 0 },
+  };
+  
+  // Handle Window Resize
+  window.addEventListener('resize', onWindowResize);
+  
+  function onWindowResize() {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    labelRenderer.setSize(innerWidth, innerHeight);
+  }
   </script>
 </body>
 </html>
