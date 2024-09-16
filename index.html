@@ -193,6 +193,14 @@ iframe::-webkit-scrollbar {
   const atmosphereMesh = new THREE.Mesh(globeGeometry, atmosphereMaterial);
   atmosphereMesh.scale.set(1.1, 1.1, 1.1);
   scene.add(atmosphereMesh);
+    // Ambient Light
+  const ambientLight = new THREE.AmbientLight(0x808080);
+  scene.add(ambientLight);
+  
+  // Directional Light
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(-1, -1, -1);
+  scene.add(directionalLight);
   </script>
 </body>
 </html>
