@@ -385,34 +385,9 @@ scene.add(directionalLight);
     },
   });
 
-  const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.1, 64, 64),
-    new THREE.ShaderMaterial({
-      vertexShader: `
-                varying vec3 vertexNormal;
-                   void main() {
-                        vertexNormal = normalize(normalMatrix * normal);
-                       gl_Position = projectionMatrix
-                       * modelViewMatrix
-                       * vec4(position, 1);
-                     }
-                    `,
-      fragmentShader: `
-                varying vec3 vertexNormal;
-                    void main() {
-                    float intensity = pow(0.6 - dot(
-                     vertexNormal, vec3(0, 0, 1.0)), 2.0);
-                     gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
-                    }
-                    `,
-	    transparent: true, 
-      blending: THREE.AdditiveBlending,
-      side: THREE.BackSide,
-    })
-  );
-	atmosphere.scale.set(1.1, 1.1, 1.1);	
+  
 let globe = new THREE.Mesh(geometry2, material);
-  scene.add(atmosphere);
+  //scene.add(atmosphere);
   scene.add(globe);
     // Markers Data
   const markersData = [
