@@ -5,6 +5,80 @@
   <title>Optimized Globe Visualization</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Stylesheets and scripts will be included here -->
+  <style>
+  /* Global Styles */
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Monospace', sans-serif;
+}
+a, button, input, select, iframe {
+  pointer-events: auto;
+}
+
+/* Info and Credits */
+#info, #credits {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: teal;
+}
+#info {
+  bottom: 7vh;
+}
+#credits {
+  bottom: 4.25vh;
+}
+
+/* Tickers */
+#iframe {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border: none;
+}
+
+/* Marker Labels */
+.marker-label {
+  position: absolute;
+  width: 142px;
+  height: 186px;
+  border: 4px solid rgb(0, 107, 63);
+  border-radius: 10px;
+  background: transparent;
+  font-family: 'Space Mono', monospace;
+  transition: opacity 0.3s;
+  z-index: 10;
+  display: none; /* Hidden by default */
+}
+.marker-label.active {
+  display: block;
+}
+.marker-label .close-button {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0.25;
+  transition: opacity 0.3s;
+}
+.marker-label .close-button:hover {
+  opacity: 1;
+}
+.marker-label .content {
+  margin: 4px;
+}
+
+/* Remove scrollbar from iframes */
+iframe::-webkit-scrollbar {
+  display: none;
+}
+</style>
 </head>
 <body>
   <!-- Info Section -->
