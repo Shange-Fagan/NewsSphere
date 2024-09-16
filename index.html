@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Optimized Globe Visualization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Stylesheets and scripts will be included here -->
+</head>
+<body>
+  <!-- Info Section -->
+  <div id="info">Click the markers to show the label</div>
+  <div id="credits">
+    Made by
+    <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank" rel="noopener">Shange Fagan</a>
+  </div>
 
+  <!-- Marker Labels (Will be dynamically generated) -->
+  <div id="labels-container"></div>
+
+  <!-- Tickers -->
+  <iframe
+    id="dayTicker"
+    src="https://rss.app/embed/v1/ticker/ye6DcnVZx4IHEsUK"
+    frameborder="0"
+    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
+  ></iframe>
+  <iframe
+    id="nightTicker"
+    src="https://rss.app/embed/v1/ticker/ye6DcnVZx4IHEsUK"
+    frameborder="0"
+    style="display: none;"
+    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
+  ></iframe>
+
+  <!-- Scripts -->
+  <!-- Include Three.js and other dependencies here -->
+
+  <!-- Main JavaScript -->
+  <script type="module">
+    // JavaScript code will go here
+  </script>
+</body>
+</html>
