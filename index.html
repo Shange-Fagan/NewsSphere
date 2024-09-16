@@ -267,7 +267,7 @@ textureLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function 
   });
     
   // Globe Geometry
-  const globeGeometry = new THREE.SphereGeometry(5.099, 64, 64);
+  const globeGeometry = new THREE.SphereGeometry(5.1, 64, 64);
   const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
   scene.add(globeMesh);
   
@@ -314,10 +314,10 @@ scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.set(5, 5, 5); // Position it to shine on the globe
 scene.add(directionalLight);
-    const sphereWidth = 5.1;
+    const sphereWidth = 5.099;
   const sphereHeight = 32.1;
   const sphereDepth = 32.1;
-  const geometry = new THREE.SphereGeometry(
+  const geometry2 = new THREE.SphereGeometry(
     sphereWidth,
     sphereHeight,
     sphereDepth
