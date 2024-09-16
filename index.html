@@ -340,19 +340,19 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
 // Toggle between Day/Night Textures and Cube Map
     function toggleDayNight() {
       if (isDay) {
-        globeMesh.material.map = nightTexture;
+        globe2.material.map = nightTexture;
         scene.background = nightCubeMap;
         document.getElementById("toggleButton").textContent = "Switch to Day";
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
       } else {
-        globeMesh.material.map = dayTexture;
+        globe2.material.map = dayTexture;
         scene.background = dayCubeMap;
         document.getElementById("toggleButton").textContent = "Switch to Night";
         document.getElementById("dayTicker").style.display = "block";
         document.getElementById("nightTicker").style.display = "none";
       }
-      globeMesh.material.needsUpdate = true;
+      globe2.material.needsUpdate = true;
       isDay = !isDay;
     }
 
