@@ -303,6 +303,24 @@ iframe::-webkit-scrollbar {
       labelDiv.classList.add('active');
     }
   });
+    // Animation Loop
+  const clock = new THREE.Clock();
+  
+  function animate() {
+    requestAnimationFrame(animate);
+  
+    // Update time uniform
+    globalUniforms.time.value = clock.getElapsedTime();
+  
+    // Update controls
+    controls.update();
+  
+    // Render
+    renderer.render(scene, camera);
+    labelRenderer.render(scene, camera);
+  }
+  
+  animate();
   </script>
 </body>
 </html>
