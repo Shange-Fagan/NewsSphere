@@ -128,16 +128,22 @@ a, button, input, select, iframe {
   z-index: 1;
 }
     #toggleButton {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-      padding: 10px 20px;
-      background-color: teal;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
+  position: absolute;
+  right: 0px;
+  top: 55px;
+  padding: 4.5px 9.5px;
+  font-size: 12px;
+  background-color: rgba(225, 225, 225, 0.25);
+  border: 1px solid rgba(225, 225, 225, 0.25);
+  border-radius: 8px;
+  color: rgba(155, 155, 155, 0.5);
+  z-index: 9999;
+  cursor: pointer; /* Add this to indicate it's clickable */
+}
+
+#toggleButton:hover {
+  background-color: rgba(225, 225, 225, 0.35);
+}
 
 /* Remove scrollbar from iframes */
 iframe::-webkit-scrollbar {
