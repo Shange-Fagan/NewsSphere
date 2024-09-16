@@ -267,18 +267,22 @@ scene.add(atmosphereMesh);
 //scene.remove(directionalLight);
 
 // Add new Ambient Light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft white light
+/*const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft white light
 scene.add(ambientLight);
 
 // Add a Directional Light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.set(5, 5, 5); // Position it to shine on the globe
-scene.add(directionalLight);
+scene.add(directionalLight);*/
+// Ambient Light
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); // Soft ambient light
+scene.add(ambientLight);
 
-// Optionally, add a Hemisphere Light
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5);
-hemiLight.position.set(0, 20, 0);
-scene.add(hemiLight);
+// Directional Light
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+directionalLight.position.set(5, 3, 5);
+scene.add(directionalLight);
+    
     // Markers Data
   const markersData = [
     {
