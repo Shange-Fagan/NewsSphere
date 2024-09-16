@@ -173,18 +173,27 @@ iframe::-webkit-scrollbar {
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
   }
-    // Load Background Texture
+    // Track loaded textures
+let texturesLoaded = 0;
+const totalTextures = 4; // Update this if you have more or fewer textures
+
+function checkTexturesLoaded() {
+  texturesLoaded++;
+  if (texturesLoaded === totalTextures) {
+    animate(); // Start animation after all textures are loaded
+  }
+}
+
+// Load Textures
 const textureLoader = new THREE.TextureLoader();
-textureLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (texture) {
+
+// Background Texture
+textureLoader.load('js/your_background.png', function (texture) {
   scene.background = texture;
-
-  // If you want to use the texture as an environment map
-  const envMap = texture;
-  scene.environment = envMap;
-
-  // Start rendering after the texture is loaded
-  animate();
+  scene.environment = texture;
+  checkTexturesLoaded();
 });
+
     // Load Textures
   //const textureLoader = new THREE.TextureLoader();
   const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
