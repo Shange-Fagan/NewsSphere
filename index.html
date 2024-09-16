@@ -54,9 +54,27 @@ a, button, input, select, iframe {
 }
 
 /* Marker Labels */
-.marker-label {
+/*.marker-label {
   position: absolute;
   object-fit: contain;
+  font-family: 'Space Mono', monospace;
+  transition: opacity 0.3s;
+  background: transparent;
+  width: 142px;
+  height: 186px;
+  border: 4px solid rgb(0, 107, 63);
+  border-radius: 10px;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  display: none; /* Hidden by default */
+}*/
+    
+ .marker-label * {
+  /* Styles here could affect all child elements, including the iframe */
+}
+  .marker-label {
+  position: absolute;
   font-family: 'Space Mono', monospace;
   transition: opacity 0.3s;
   background: transparent;
@@ -93,13 +111,20 @@ a, button, input, select, iframe {
   opacity: 1;
 }
 
-.marker-label,
-.marker-label * {
-  pointer-events: auto;
-}
-
 .marker-label .content {
   margin: 4px;
+  width: calc(100% - 8px); /* Adjust for margins */
+  height: calc(100% - 8px);
+}
+
+.marker-label iframe {
+  all: initial;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  position: relative;
+  z-index: 1;
 }
 
 /* Remove scrollbar from iframes */
@@ -295,6 +320,7 @@ scene.add(directionalLight);
       id: 1,
       position: [5.1, 1.2, 1.5],
       iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
+      sandbox="allow-same-origin allow-scripts"
     },
     // ... Add other markers here
     {
@@ -302,48 +328,56 @@ scene.add(directionalLight);
       id: 2,
       position: [5.1, 0.7, 1.8],
       iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
+      sandbox="allow-same-origin allow-scripts"
     },
     {
       //America
       id: 3,
       position: [5.1, 0.9, 0],
       iframeSrc: "https://rss.app/embed/v1/carousel/j4Lz0RvN9tozg8ti",
+      sandbox="allow-same-origin allow-scripts"
     },
     {
       //South America
       id: 4,
       position: [5.1, 1.6, 0.4],
       iframeSrc: "https://rss.app/embed/v1/carousel/egKZAx1vbuN40QJ5",
+      sandbox="allow-same-origin allow-scripts"
     },
     {
       //Middle East
       id: 5,
       position: [5.1, 1, 2.3],
       iframeSrc: "https://rss.app/embed/v1/carousel/QtI2HAU7LB5FfP93",
+      sandbox="allow-same-origin allow-scripts"
     },
     {
       //Asia
       id: 6,
       position: [5.1, 0.9, 3],
       iframeSrc: "https://rss.app/embed/v1/carousel/dwbg7NploOubDAzi",
+      sandbox="allow-same-origin allow-scripts"
     },
     {
       //Japan
       id: 7,
       position: [5.1, 0.9, 4],
       iframeSrc: "https://rss.app/embed/v1/carousel/H7fYbpNYSCQC0Kob",
+      sandbox="allow-same-origin allow-scripts"
     },
     {
       // Jamaica
       id: 8,
       position: [5.1, 1.2, 0.2],
       iframeSrc: "https://rss.app/embed/v1/carousel/t8w4T1GZ8wZ4bHWQ",
+      sandbox="allow-same-origin allow-scripts"
     },
     {
       //UK
       id: 9,
       position: [5.1, 0.6, 1.45],
       iframeSrc: "https://rss.app/embed/v1/carousel/h02Ux8iXmbwRcpWU",
+      sandbox="allow-same-origin allow-scripts"
     },
   ];
   
