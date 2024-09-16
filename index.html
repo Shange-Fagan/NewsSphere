@@ -196,8 +196,7 @@ iframe::-webkit-scrollbar {
     CSS2DObject,
   } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/renderers/CSS2DRenderer.js";
     import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/RGBELoader.js';
-  // Initialize scene
-    function init() {
+  
   // Scene Setup
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);
@@ -714,9 +713,7 @@ let globe = new THREE.Mesh(geometry2, material);
 
   
   animate();
-    };
-      // Initialize the scene
-    init();
+    
   </script>
 </body>
 </html>
