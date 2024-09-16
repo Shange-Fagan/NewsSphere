@@ -259,6 +259,9 @@ scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.set(5, 5, 5); // Position it to shine on the globe
 scene.add(directionalLight);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5);
+hemiLight.position.set(0, 20, 0);
+scene.add(hemiLight);
     
     // Markers Data
   const markersData = [
