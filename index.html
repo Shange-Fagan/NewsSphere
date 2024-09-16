@@ -251,6 +251,9 @@ function checkTexturesLoaded() {
 }
     //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
+      let isMidday = false;
+let dayHdrTextureCube, middayHdrTextureCube, nightHdrTextureCube;
+let texturesLoaded = false; // Track if all textures are loaded
 
 // Load Textures
 const textureLoader = new THREE.TextureLoader();
