@@ -160,6 +160,39 @@ iframe::-webkit-scrollbar {
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
   }
+    // Load Textures
+  const textureLoader = new THREE.TextureLoader();
+  const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+  const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
+  const bumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+  const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
+  
+  // Globe Material
+  const globeMaterial = new THREE.MeshPhongMaterial({
+    map: dayTexture,
+    bumpMap: bumpMap,
+    bumpScale: 0.35,
+    specularMap: specularMap,
+    specular: new THREE.Color('grey'),
+    shininess: 15,
+  });
+  
+  // Globe Geometry
+  const globeGeometry = new THREE.SphereGeometry(5, 64, 64);
+  const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
+  scene.add(globeMesh);
+  
+  // Atmosphere
+  const atmosphereMaterial = new THREE.ShaderMaterial({
+    vertexShader: /* Vertex Shader Code */,
+    fragmentShader: /* Fragment Shader Code */,
+    blending: THREE.AdditiveBlending,
+    side: THREE.BackSide,
+    transparent: true,
+  });
+  const atmosphereMesh = new THREE.Mesh(globeGeometry, atmosphereMaterial);
+  atmosphereMesh.scale.set(1.1, 1.1, 1.1);
+  scene.add(atmosphereMesh);
   </script>
 </body>
 </html>
