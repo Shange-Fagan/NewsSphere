@@ -202,30 +202,15 @@ textureLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function 
   const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
   
   // Globe Material
-  /*const globeMaterial = new THREE.MeshPhongMaterial({
+  const globeMaterial = new THREE.MeshPhongMaterial({
     map: dayTexture,
     bumpMap: bumpMap,
     bumpScale: 0.35,
     specularMap: specularMap,
     specular: new THREE.Color('grey'),
     shininess: 15,
-  });*/
-    // Globe Material using MeshStandardMaterial
-  /*const globeMaterial = new THREE.MeshStandardMaterial({
-    map: dayTexture,
-    bumpMap: bumpMap,
-    bumpScale: 0.35,
-    metalness: 0.0,
-    roughness: 1.0,
-  });*/
-    const globeMaterial = new THREE.MeshPhongMaterial({
-    map: dayTexture,
-    bumpMap: bumpMap,
-    bumpScale: 0.05,
-    specular: new THREE.Color('grey'),
-    shininess: 10, // Adjust shininess to control specular highlight
   });
-  
+    
   // Globe Geometry
   const globeGeometry = new THREE.SphereGeometry(5, 64, 64);
   const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
@@ -267,20 +252,12 @@ scene.add(atmosphereMesh);
 //scene.remove(directionalLight);
 
 // Add new Ambient Light
-/*const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft white light
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft white light
 scene.add(ambientLight);
 
 // Add a Directional Light
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.set(5, 5, 5); // Position it to shine on the globe
-scene.add(directionalLight);*/
-// Ambient Light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); // Soft ambient light
-scene.add(ambientLight);
-
-// Directional Light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-directionalLight.position.set(5, 3, 5);
 scene.add(directionalLight);
     
     // Markers Data
