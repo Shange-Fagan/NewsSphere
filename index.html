@@ -202,13 +202,21 @@ textureLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function 
   const specularMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png");
   
   // Globe Material
-  const globeMaterial = new THREE.MeshPhongMaterial({
+  /*const globeMaterial = new THREE.MeshPhongMaterial({
     map: dayTexture,
     bumpMap: bumpMap,
     bumpScale: 0.35,
     specularMap: specularMap,
     specular: new THREE.Color('grey'),
     shininess: 15,
+  });*/
+    // Globe Material using MeshStandardMaterial
+  const globeMaterial = new THREE.MeshStandardMaterial({
+    map: dayTexture,
+    bumpMap: bumpMap,
+    bumpScale: 0.35,
+    metalness: 0.0,
+    roughness: 1.0,
   });
   
   // Globe Geometry
