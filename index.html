@@ -337,9 +337,27 @@ const cubeMap = cubeTextureLoader.load([
     // Set Initial Background Cube Map
     scene.background = dayCubeMap;
 
-      // Set the cube map as the scene background
-      scene.background = cubeMap;
+// Toggle between Day/Night Textures and Cube Map
+    function toggleDayNight() {
+      if (isDay) {
+        globeMesh.material.map = nightTexture;
+        scene.background = nightCubeMap;
+        document.getElementById("toggleButton").textContent = "Switch to Day";
+        document.getElementById("dayTicker").style.display = "none";
+        document.getElementById("nightTicker").style.display = "block";
+      } else {
+        globeMesh.material.map = dayTexture;
+        scene.background = dayCubeMap;
+        document.getElementById("toggleButton").textContent = "Switch to Night";
+        document.getElementById("dayTicker").style.display = "block";
+        document.getElementById("nightTicker").style.display = "none";
+      }
+      globeMesh.material.needsUpdate = true;
+      isDay = !isDay;
+    }
 
+// Add Event Listener to the Toggle Button
+    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 
     // Load Textures
   //const textureLoader = new THREE.TextureLoader();
@@ -762,7 +780,7 @@ let globe = new THREE.Mesh(geometry2, material);
     // Render
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
-  }// Toggle between day and night textures
+  }/*// Toggle between day and night textures
     function toggleDayNight() {
       if (isDay) {
         globeMesh.material.map = nightTexture;
@@ -774,10 +792,10 @@ let globe = new THREE.Mesh(geometry2, material);
       globeMesh.material.needsUpdate = true;
       isDay = !isDay;
     }
-
+    
     // Add event listener to the button
     document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
-
+*/
   
   animate();
     
