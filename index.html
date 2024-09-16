@@ -201,6 +201,47 @@ iframe::-webkit-scrollbar {
   const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
   directionalLight.position.set(-1, -1, -1);
   scene.add(directionalLight);
+    // Markers Data
+  const markersData = [
+    {
+      id: 1,
+      position: [5.1, 1.2, 1.5],
+      iframeSrc: "https://rss.app/embed/v1/carousel/dIqCIlIGNRu8C6sq",
+    },
+    // ... Add other markers here
+  ];
+  
+  // Marker Geometry and Material
+  const markerGeometry = new THREE.PlaneGeometry();
+  const markerMaterial = new THREE.MeshBasicMaterial({
+    color: 0xff3232,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.time = globalUniforms.time;
+      shader.vertexShader = /* Vertex Shader Code */;
+      shader.fragmentShader = /* Fragment Shader Code */;
+    },
+  });
+  markerMaterial.defines = { USE_UV: '' };
+  
+  // Creating Markers
+  const markerCount = markersData.length;
+  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  
+  const dummy = new THREE.Object3D();
+  const phaseArray = [];
+  
+  markersData.forEach((data, index) => {
+    const [radius, phi, theta] = data.position;
+    dummy.position.setFromSphericalCoords(radius, phi, theta);
+    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
+    dummy.updateMatrix();
+    markers.setMatrixAt(index, dummy.matrix);
+    phaseArray.push(Math.random());
+    data.worldPosition = dummy.position.clone();
+  });
+  
+  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
+  scene.add(markers);
   </script>
 </body>
 </html>
