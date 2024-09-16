@@ -182,7 +182,7 @@ iframe::-webkit-scrollbar {
   }
   </script>
 
-
+<button id="toggleButton">Switch to Night</button>
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
 
@@ -196,7 +196,8 @@ iframe::-webkit-scrollbar {
     CSS2DObject,
   } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/renderers/CSS2DRenderer.js";
     import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/RGBELoader.js';
-  
+  // Initialize scene
+    function init() {
   // Scene Setup
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);
@@ -248,6 +249,8 @@ function checkTexturesLoaded() {
     animate(); // Start animation after all textures are loaded
   }
 }
+    let dayTexture, nightTexture;
+    let isDay = true; // Track whether it's currently day or night
 
 // Load Textures
 const textureLoader = new THREE.TextureLoader();
@@ -276,10 +279,17 @@ textureLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function 
     shininess: 15,
     
   });
+      const material = new THREE.MeshPhongMaterial({
+        map: dayTexture,      // Use day texture by default
+        bumpMap: bumpMap,
+        bumpScale: 0.35,
+        shininess: 50,         // Specular highlight intensity
+        specular: 0x222222     // Specular color (adjust for reflectiveness)
+      });
     
   // Globe Geometry
   const globeGeometry = new THREE.SphereGeometry(5.1, 64, 64);
-  const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
+  const globeMesh = new THREE.Mesh(globeGeometry, material);
   scene.add(globeMesh);
   
   // Atmosphere
@@ -673,9 +683,27 @@ let globe = new THREE.Mesh(geometry2, material);
     // Render
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
-  }
+  }// Toggle between day and night textures
+    function toggleDayNight() {
+      if (isDay) {
+        globeMesh.material.map = nightTexture;
+        document.getElementById("toggleButton").textContent = "Switch to Day";
+      } else {
+        globeMesh.material.map = dayTexture;
+        document.getElementById("toggleButton").textContent = "Switch to Night";
+      }
+      globeMesh.material.needsUpdate = true;
+      isDay = !isDay;
+    }
+
+    // Add event listener to the button
+    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
+
   
   animate();
+    };
+      // Initialize the scene
+    init();
   </script>
 </body>
 </html>
