@@ -386,7 +386,7 @@ scene.add(directionalLight);
   });
 
   const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.1, 32.1, 32.1),
+    new THREE.SphereGeometry(5.1, 64, 64),
     new THREE.ShaderMaterial({
       vertexShader: `
                 varying vec3 vertexNormal;
