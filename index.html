@@ -281,14 +281,16 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
 });*/
 	  // Load the Cube Map
       const cubeTextureLoader = new THREE.CubeTextureLoader();
-      const cubeMap = cubeTextureLoader.load([
-        'js/px.png', // Right face
-        'js/nx.png', // Left face
-        'js/py.png', // Top face
-        'js/ny.png', // Bottom face
-        'js/pz.png', // Front face
-        'js/nz.png'  // Back face
-      ]);
+	  const isMobile = /Mobi/i.test(navigator.userAgent);
+
+const cubeMap = cubeTextureLoader.load([
+  isMobile ? 'js/px.webp' : 'js/px.png', // Right face
+  isMobile ? 'js/nx.webp' : 'js/nx.png', // Left face
+  isMobile ? 'js/py.webp' : 'js/py.png', // Top face
+  isMobile ? 'js/ny.webp' : 'js/ny.png', // Bottom face
+  isMobile ? 'js/pz.webp' : 'js/pz.png', // Front face
+  isMobile ? 'js/nz.webp' : 'js/nz.png'  // Back face
+]);
 
       // Set the cube map as the scene background
       scene.background = cubeMap;
