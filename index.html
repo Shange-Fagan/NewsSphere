@@ -242,6 +242,41 @@ iframe::-webkit-scrollbar {
   
   markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
   scene.add(markers);
+    // Labels Container
+  const labelsContainer = document.getElementById('labels-container');
+  
+  // Create Labels
+  markersData.forEach((data) => {
+    // Create Label Div
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'marker-label';
+    labelDiv.id = `label-${data.id}`;
+  
+    // Close Button
+    const closeButton = document.createElement('button');
+    closeButton.className = 'close-button';
+    closeButton.innerText = 'X';
+    closeButton.addEventListener('click', () => {
+      labelDiv.classList.remove('active');
+    });
+    labelDiv.appendChild(closeButton);
+  
+    // Content Div
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'content';
+    labelDiv.appendChild(contentDiv);
+  
+    // Append to Labels Container
+    labelsContainer.appendChild(labelDiv);
+  
+    // CSS2DObject
+    const labelObject = new CSS2DObject(labelDiv);
+    labelObject.position.copy(data.worldPosition);
+    scene.add(labelObject);
+  
+    // Store label object for interaction
+    data.labelObject = labelObject;
+  });
   </script>
 </body>
 </html>
