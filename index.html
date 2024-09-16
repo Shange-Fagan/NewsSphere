@@ -261,24 +261,12 @@ function checkTexturesLoaded() {
 const textureLoader = new THREE.TextureLoader();
 
 // Background Texture
-// Load HDRI texture and set as background
-    function loadHdriTextures() {
-      const hdrLoader = new THREE.TextureLoader(); // Use the correct loader based on your texture type
-
-      hdrLoader.load(
-        "js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png",  // Replace with your actual HDRI texture path
-        function (texture) {
-          const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-          rt.fromEquirectangularTexture(renderer, texture); // Convert to cube texture
-          dayHdrTextureCube = rt.texture;
-
-          // Set the scene background to the loaded cube texture
-          scene.background = dayHdrTextureCube;
-
-          console.log("Day HDRI Loaded");
-        }
-      );
-    }
+    const loader = new THREE.TextureLoader();
+loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (texture) {
+  const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+  rt.fromEquirectangularTexture(renderer, texture);
+  scene.background = rt.texture;
+});
 
     // Load Textures
   //const textureLoader = new THREE.TextureLoader();
