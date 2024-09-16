@@ -28,7 +28,6 @@ a, button, input, select, iframe {
   text-align: center;
   color: teal;
   z-index: 1;
-  font-family: "Syne", sans-serif;
 }
 
 #info {
@@ -43,15 +42,23 @@ a, button, input, select, iframe {
 #dayTicker,
 #nightTicker {
   display: block; /* Show day ticker by default */
-		pointer-events: auto;
       position: fixed;
       top: 0vh;
       color: teal;
       width: 100%;
       font-family: Monospace;
-      text-align: center;
+       text-align: center;
+      z-index: 9999;
     
 }
+	  /* Responsive Ticker for Mobile */
+    @media (max-width: 768px) {
+      #dayTicker, #nightTicker {
+        font-size: 10px;
+        height: 40px;
+        top: 0;
+      }
+    }
 
 /* Marker Labels */
 /*.marker-label {
@@ -126,23 +133,25 @@ a, button, input, select, iframe {
   position: relative;*/
   z-index: 1;
 }
+    /* Button Style */
     #toggleButton {
-  position: absolute;
-  right: 0px;
-  top: 55px;
-  padding: 4.5px 9.5px;
-  font-size: 12px;
-  background-color: rgba(225, 225, 225, 0.25);
-  border: 1px solid rgba(225, 225, 225, 0.25);
-  border-radius: 8px;
-  color: rgba(155, 155, 155, 0.5);
-  z-index: 9999;
-  cursor: pointer; /* Add this to indicate it's clickable */
-}
+      position: absolute;
+      right: 0px;
+      top: 55px;
+      padding: 4.5px 9.5px;
+      font-size: 12px;
+      background-color: rgba(225, 225, 225, 0.25);
+      border: 1px solid rgba(225, 225, 225, 0.25);
+      border-radius: 8px;
+      color: rgba(155, 155, 155, 0.5);
+      z-index: 9999;
+      cursor: pointer;
+    }
 
-#toggleButton:hover {
-  background-color: rgba(225, 225, 225, 0.35);
-}
+    #toggleButton:hover {
+      background-color: rgba(225, 225, 225, 0.35);
+    }
+
 :root {
      /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
@@ -179,6 +188,13 @@ iframe::-webkit-scrollbar {
     id="dayTicker"
     src="https://rss.app/embed/v1/ticker/ye6DcnVZx4IHEsUK"
     frameborder="0"
+    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
+  ></iframe>
+  <iframe
+    id="nightTicker"
+    src="https://rss.app/embed/v1/ticker/ye6DcnVZx4IHEsUK"
+    frameborder="0"
+    style="display: none;"
     sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
   ></iframe>
   <iframe
@@ -240,7 +256,15 @@ iframe::-webkit-scrollbar {
   controls.minDistance = 15;
   controls.maxDistance = 20;
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.1;
+  controls.autoRotateSpeed = 0.25;
+
+   // Lighting - Reduced intensity to reduce glare
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft ambient light
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4); // Reduced intensity
+    directionalLight.position.set(5, 5, 5); // Adjust position
+    scene.add(directionalLight);
   
   // Global Uniforms
   const globalUniforms = {
@@ -291,6 +315,27 @@ const cubeMap = cubeTextureLoader.load([
   isMobile ? 'js/pz.webp' : 'js/pz.png', // Front face
   isMobile ? 'js/nz.webp' : 'js/nz.png'  // Back face
 ]);
+	  // Load Cube Maps for Background
+    const cubeTextureLoader = new THREE.CubeTextureLoader();
+    const dayCubeMap = cubeTextureLoader.load([
+     isMobile ? 'js/px.webp' : 'js/px.png', // Right face
+  isMobile ? 'js/nx.webp' : 'js/nx.png', // Left face
+  isMobile ? 'js/py.webp' : 'js/py.png', // Top face
+  isMobile ? 'js/ny.webp' : 'js/ny.png', // Bottom face
+  isMobile ? 'js/pz.webp' : 'js/pz.png', // Front face
+  isMobile ? 'js/nz.webp' : 'js/nz.png'  // Back face
+    ]);
+    const nightCubeMap = cubeTextureLoader.load([
+      isMobile ? 'js/px.webp' : 'js/px.png', // Right face
+  isMobile ? 'js/nx.webp' : 'js/nx.png', // Left face
+  isMobile ? 'js/py.webp' : 'js/py.png', // Top face
+  isMobile ? 'js/ny.webp' : 'js/ny.png', // Bottom face
+  isMobile ? 'js/pz.webp' : 'js/pz.png', // Front face
+  isMobile ? 'js/nz.webp' : 'js/nz.png'  // Back face
+    ]);
+
+    // Set Initial Background Cube Map
+    scene.background = dayCubeMap;
 
       // Set the cube map as the scene background
       scene.background = cubeMap;
