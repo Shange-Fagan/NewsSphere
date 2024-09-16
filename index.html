@@ -173,23 +173,18 @@ iframe::-webkit-scrollbar {
     renderer.setSize(innerWidth, innerHeight);
     labelRenderer.setSize(innerWidth, innerHeight);
   }
-    // HDRI Background
-  const rgbeLoader = new RGBELoader();
-  rgbeLoader.setDataType(THREE.UnsignedByteType); // Set data type to Unsigned Byte
-  
-  // Replace the URL with the path to your HDRI file
-  rgbeLoader.load('/js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (texture) {
-    const pmremGenerator = new THREE.PMREMGenerator(renderer);
-    pmremGenerator.compileEquirectangularShader();
-  
-    const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-  
-    scene.background = envMap;
-    scene.environment = envMap;
-  
-    texture.dispose();
-    pmremGenerator.dispose();
-  });
+    // Load Background Texture
+const textureLoader = new THREE.TextureLoader();
+textureLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (texture) {
+  scene.background = texture;
+
+  // If you want to use the texture as an environment map
+  const envMap = texture;
+  scene.environment = envMap;
+
+  // Start rendering after the texture is loaded
+  animate();
+});
     // Load Textures
   const textureLoader = new THREE.TextureLoader();
   const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
