@@ -279,7 +279,7 @@ textureLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function 
     shininess: 15,
     
   });
-      const material = new THREE.MeshPhongMaterial({
+      const material2 = new THREE.MeshPhongMaterial({
         map: dayTexture,      // Use day texture by default
         bumpMap: bumpMap,
         bumpScale: 0.35,
@@ -289,7 +289,7 @@ textureLoader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function 
     
   // Globe Geometry
   const globeGeometry = new THREE.SphereGeometry(5.1, 64, 64);
-  const globeMesh = new THREE.Mesh(globeGeometry, material);
+  const globeMesh = new THREE.Mesh(globeGeometry, material2);
   scene.add(globeMesh);
   
   // Atmosphere
