@@ -409,6 +409,14 @@ loader.load('js/0f2dd307-0d28-4fe9-9ef9-db84277033dd_hdr3.png', function (textur
   side: THREE.BackSide,
   transparent: true,
 });
+	  const sphereWidth2 = 5.1;
+  const sphereHeight2 = 64;
+  const sphereDepth32 = 64;
+  const geometry3 = new THREE.SphereGeometry(
+    sphereWidth2,
+    sphereHeight2,
+    sphereDepth2
+  );
 const atmosphereMesh = new THREE.Mesh(geometry3, atmosphereMaterial);
 atmosphereMesh.scale.set(1.1, 1.1, 1.1);
 scene.add(atmosphereMesh);
@@ -432,14 +440,7 @@ scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 directionalLight.position.set(5, 5, 5); // Position it to shine on the globe
 scene.add(directionalLight);
-	  const sphereWidth2 = 5.1;
-  const sphereHeight2 = 64;
-  const sphereDepth32 = 64;
-  const geometry3 = new THREE.SphereGeometry(
-    sphereWidth2,
-    sphereHeight2,
-    sphereDepth2
-  );
+	 
     const sphereWidth = 5.099;
   const sphereHeight = 64;
   const sphereDepth = 64;
